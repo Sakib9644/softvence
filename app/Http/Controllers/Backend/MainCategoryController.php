@@ -26,11 +26,9 @@ class MainCategoryController extends Controller
             $category = new MainCategory();
             $category->name = $request->name;
 
-            $image = upload_image($request, $category);
 
-            if ($image) {
-                $category->image = upload_image($request, $category);
-            }
+            $category->image = upload_image($request, $category);
+
             $category->save();
 
             return redirect()->back()->with('success', 'Main Category created successfully.');
