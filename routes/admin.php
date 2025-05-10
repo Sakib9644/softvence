@@ -12,9 +12,14 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Contracts\Permission;
 
 Route::prefix('admin')->middleware('auth')->group(function () {
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
     Route::get('/backend/edit', [WebsitesetupController::class, 'edit'])->name('backend.edit');
     Route::post('/backend/update', [WebsitesetupController::class, 'update'])->name('websitesetup.update');
-Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('main-category', MainCategoryController::class);
