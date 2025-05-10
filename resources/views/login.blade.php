@@ -54,7 +54,11 @@
                                     <img src="{{ asset($website_settings->logo ?? 'No Site Icon') }}" alt="" height="20">
                                 </a>
                             </div>
-                            <p class="mt-3 fs-15 fw-medium">{{$website_settings->website_name}}</p>
+                            <p class="mt-3 fs-15 fw-medium">{{$website_settings->website_name ?? null}}</p>
+                            @php
+                                
+                                // dd($website_settings->website_name);
+                            @endphp
                         </div>
                     </div>
                 </div>
@@ -67,7 +71,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center mt-2">
                                     <h5 class="text-primary">Welcome Back !</h5>
-                                    <p class="text-muted">Sign in to continue to {{$website_settings->website_name}}.</p>
+                                    <p class="text-muted">Sign in to continue to {{$website_settings->website_name ?? null}}.</p>
                                 </div>
                                 <div class="p-2 mt-4">
                                     <form method="POST" action="{{ route('login') }}">

@@ -17,19 +17,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         $user = User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('12345678'),
+
+            "name"=> "Admin User",
+            "email"=> "admin@gmail.com",
+            "role"=> "Super Admin",
+            "password"=> Hash::make("12345678"),
 
         ]);
+
+       
         $role = new Role();
         $role->name = 'Super Admin';
         $role->save();
 
-        $user->assignRole('Super Admin');
+        $user->assignRole($role);
+
 
 
         $permissions = [
