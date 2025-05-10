@@ -15,120 +15,146 @@
         </button>
     </div>
 
-    <div id="scrollbar">
-        <div class="container-fluid">
-            <div id="two-column-menu"></div>
-            <ul class="navbar-nav" id="navbar-nav">
-                <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+ <div id="scrollbar">
+    <div class="container-fluid">
+        <div id="two-column-menu"></div>
+        <ul class="navbar-nav" id="navbar-nav">
+            <li class="menu-title"><span data-key="t-menu">Menu</span></li>
 
-                {{-- Dashboard --}}
-                @can('dashboard')
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="/dashboard">
-                        <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboard">Dashboard</span>
-                    </a>
-                </li>
-                @endcan
+            {{-- Dashboard --}}
+            @can('dashboard')
+            <li class="nav-item">
+                <a class="nav-link menu-link" href="/dashboard">
+                    <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboard">Dashboard</span>
+                </a>
+            </li>
+            @endcan
 
-                {{-- System Settings --}}
-                @canany(['profile-settings.', 'security-settings.', 'notification-settings.','admin-settings'])
-                @php
-                    $isSystemSettingsActive = Route::is('backend.edit') || Route::is('profile.edit');
-                @endphp
+            {{-- System Settings --}}
+            @canany(['profile-settings.', 'security-settings.', 'notification-settings.', 'admin-settings'])
+            @php
+                $isSystemSettingsActive = Route::is('backend.edit') || Route::is('profile.edit');
+            @endphp
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link {{ $isSystemSettingsActive ? '' : 'collapsed' }}"
-                       href="#sidebarSystemSettings" data-bs-toggle="collapse" role="button"
-                       aria-expanded="{{ $isSystemSettingsActive ? 'true' : 'false' }}"
-                       aria-controls="sidebarSystemSettings">
-                        <i class="ri-settings-3-line"></i>
-                        <span data-key="t-system-settings">System Settings</span>
-                    </a>
+            <li class="nav-item">
+                <a class="nav-link menu-link {{ $isSystemSettingsActive ? '' : 'collapsed' }}"
+                   href="#sidebarSystemSettings" data-bs-toggle="collapse" role="button"
+                   aria-expanded="{{ $isSystemSettingsActive ? 'true' : 'false' }}"
+                   aria-controls="sidebarSystemSettings">
+                    <i class="ri-settings-3-line"></i>
+                    <span data-key="t-system-settings">System Settings</span>
+                </a>
 
-                    <div class="collapse menu-dropdown {{ $isSystemSettingsActive ? 'show' : '' }}"
-                         id="sidebarSystemSettings">
-                        <ul class="nav nav-sm flex-column">
-                            @can('admin-settings')
-                            <li class="nav-item">
-                                <a href="{{ route('backend.edit') }}"
-                                   class="nav-link {{ Route::is('backend.edit') ? 'active' : '' }}"
-                                   data-key="t-system">Admin Settings</a>
-                            </li>
-                            @endcan
-                            @can('profile-settings')
-                            <li class="nav-item">
-                                <a href="{{ route('profile.edit') }}"
-                                   class="nav-link {{ Route::is('profile.edit') ? 'active' : '' }}"
-                                   data-key="t-profile">Profile Settings</a>
-                            </li>
-                            @endcan
-                            @can('security-settings')
-                            <li class="nav-item">
-                                <a 
-                                   class="nav-link {{ Route::is('security.edit') ? 'active' : '' }}"
-                                   data-key="t-security">Security Settings</a>
-                            </li>
-                            @endcan
-                            @can('notification-settings')
-                            <li class="nav-item">
-                                <a 
-                                   class="nav-link {{ Route::is('notification.edit') ? 'active' : '' }}"
-                                   data-key="t-notification">Notification Settings</a>
-                            </li>
-                            @endcan
-                        </ul>
-                    </div>
-                </li>
+                <div class="collapse menu-dropdown {{ $isSystemSettingsActive ? 'show' : '' }}"
+                     id="sidebarSystemSettings">
+                    <ul class="nav nav-sm flex-column">
+                        @can('admin-settings')
+                        <li class="nav-item">
+                            <a href="{{ route('backend.edit') }}"
+                               class="nav-link {{ Route::is('backend.edit') ? 'active' : '' }}"
+                               data-key="t-system">Admin Settings</a>
+                        </li>
+                        @endcan
+                        @can('profile-settings')
+                        <li class="nav-item">
+                            <a href="{{ route('profile.edit') }}"
+                               class="nav-link {{ Route::is('profile.edit') ? 'active' : '' }}"
+                               data-key="t-profile">Profile Settings</a>
+                        </li>
+                        @endcan
+                        @can('security-settings')
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('security.edit') ? 'active' : '' }}"
+                               data-key="t-security">Security Settings</a>
+                        </li>
+                        @endcan
+                        @can('notification-settings')
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('notification.edit') ? 'active' : '' }}"
+                               data-key="t-notification">Notification Settings</a>
+                        </li>
+                        @endcan
+                    </ul>
+                </div>
+            </li>
+            @endcanany
 
-                @endcanany
+            {{-- Role and Permission --}}
+            @canany(['role.create', 'permission.create', 'user.create'])
+            @php
+                $isRolePermissionActive = Route::is('permissions.index') || Route::is('roles.index') || Route::is('users.create');
+            @endphp
 
-                {{-- Role and Permission --}}
-                @canany(['role.create', 'permission.create', 'user.create'])
-                @php
-                    $isRolePermissionActive = Route::is('permissions.index') || Route::is('roles.index') || Route::is('users.create');
-                @endphp
+            <li class="nav-item">
+                <a class="nav-link menu-link {{ $isRolePermissionActive ? '' : 'collapsed' }}"
+                   href="#sidebarRolePermission" data-bs-toggle="collapse" role="button"
+                   aria-expanded="{{ $isRolePermissionActive ? 'true' : 'false' }}"
+                   aria-controls="sidebarRolePermission">
+                    <i class="ri-shield-user-line"></i>
+                    <span data-key="t-role-permission">Role Permission</span>
+                </a>
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link {{ $isRolePermissionActive ? '' : 'collapsed' }}"
-                       href="#sidebarRolePermission" data-bs-toggle="collapse" role="button"
-                       aria-expanded="{{ $isRolePermissionActive ? 'true' : 'false' }}"
-                       aria-controls="sidebarRolePermission">
-                        <i class="ri-shield-user-line"></i>
-                        <span data-key="t-role-permission">Role Permission</span>
-                    </a>
+                <div class="collapse menu-dropdown {{ $isRolePermissionActive ? 'show' : '' }}"
+                     id="sidebarRolePermission">
+                    <ul class="nav nav-sm flex-column">
+                        @can('role.create')
+                        <li class="nav-item">
+                            <a href="{{ route('roles.index') }}"
+                               class="nav-link {{ Route::is('roles.index') ? 'active' : '' }}"
+                               data-key="t-create-role">Create Role</a>
+                        </li>
+                        @endcan
+                        @can('permission.create')
+                        <li class="nav-item">
+                            <a href="{{ route('permissions.index') }}"
+                               class="nav-link {{ Route::is('permissions.index') ? 'active' : '' }}"
+                               data-key="t-create-permission">Create Permission</a>
+                        </li>
+                        @endcan
+                        @can('user.create')
+                        <li class="nav-item">
+                            <a href="{{ route('users.create') }}"
+                               class="nav-link {{ Route::is('users.create') ? 'active' : '' }}"
+                               data-key="t-create-user">Create User</a>
+                        </li>
+                        @endcan
+                    </ul>
+                </div>
+            </li>
+            @endcanany
 
-                    <div class="collapse menu-dropdown {{ $isRolePermissionActive ? 'show' : '' }}"
-                         id="sidebarRolePermission">
-                        <ul class="nav nav-sm flex-column">
-                            @can('role.create')
-                            <li class="nav-item">
-                                <a href="{{ route('roles.index') }}"
-                                   class="nav-link {{ Route::is('roles.index') ? 'active' : '' }}"
-                                   data-key="t-create-role">Create Role</a>
-                            </li>
-                            @endcan
-                            @can('permission.create')
-                            <li class="nav-item">
-                                <a href="{{ route('permissions.index') }}"
-                                   class="nav-link {{ Route::is('permissions.index') ? 'active' : '' }}"
-                                   data-key="t-create-permission">Create Permission</a>
-                            </li>
-                            @endcan
-                            @can('user.create')
-                            <li class="nav-item">
-                                <a href="{{ route('users.create') }}"
-                                   class="nav-link {{ Route::is('users.create') ? 'active' : '' }}"
-                                   data-key="t-create-user">Create User</a>
-                            </li>
-                            @endcan
-                        </ul>
-                    </div>
-                </li>
-                @endcanany
+            {{-- Categories --}}
+            @canany(['main-category.index', 'main-category.create'])
+            <li class="nav-item">
+                <a class="nav-link menu-link" href="#sidebarCategory" data-bs-toggle="collapse" role="button"
+                   aria-expanded="false" aria-controls="sidebarCategory">
+                    <i class="ri-list-unordered"></i> <!-- Icon for category section -->
+                    <span data-key="t-category">Categories</span>
+                </a>
 
-            </ul>
-        </div>
+                <div class="collapse menu-dropdown" id="sidebarCategory">
+                    <ul class="nav nav-sm flex-column">
+                        @can('main-category.index')
+                        <li class="nav-item">
+                            <a href="{{ route('main-category.index') }}" class="nav-link {{ Route::is('main-category.index') ? 'active' : '' }}"
+                               data-key="t-all-categories">All Categories</a>
+                        </li>
+                        @endcan
+
+                        @can('main-category.create')
+                        <li class="nav-item">
+                            <a href="{{ route('main-category.create') }}" class="nav-link {{ Route::is('category.create') ? 'active' : '' }}"
+                               data-key="t-create-category">Create Category</a>
+                        </li>
+                        @endcan
+                    </ul>
+                </div>
+            </li>
+            @endcanany
+        </ul>
     </div>
+</div>
+
 
     <div class="sidebar-background"></div>
 </div>

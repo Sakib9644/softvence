@@ -11,7 +11,9 @@
 
     <link rel="shortcut icon" href="{{ asset($website_settings->site_icon ?? 'No Site Icon') }}">
  
- 
+
+<!-- DataTables Bootstrap 5 CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
     <!-- Jsvectormap CSS -->
     <link href="{{ asset('assets/libs/jsvectormap/jsvectormap.min.css') }}" rel="stylesheet" type="text/css" />
 

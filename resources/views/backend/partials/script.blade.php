@@ -31,6 +31,11 @@
 <!-- Dashboard Init -->
 <script src="{{ asset('assets/js/pages/dashboard-ecommerce.init.js') }}"></script>
 
+<!-- DataTables Core -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables Bootstrap 5 JS -->
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>t>
 
 <!-- App JS -->
 <script src="{{ asset('assets/js/app.js') }}"></script>
@@ -62,7 +67,6 @@
         });
     }
 </script>
-
 
 @if (session('success'))
     <script>
