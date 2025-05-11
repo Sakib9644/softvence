@@ -37,10 +37,25 @@
 <!-- DataTables Bootstrap 5 JS -->
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>t>
 
+<!-- jQuery -->
+
+<!-- Include Select2 JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 <!-- App JS -->
 <script src="{{ asset('assets/js/app.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.all.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            theme: '',  // Disable Select2's default theme
+            dropdownAutoWidth: true, // Keep the width of the dropdown same as the select box
+            width: '100%' // Make sure the select box width is 100%
+        });
+    });
+</script>
 @if ($errors->any())
     <script>
         Swal.fire({

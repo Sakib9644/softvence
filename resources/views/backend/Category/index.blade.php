@@ -51,7 +51,6 @@
                         </div>
                     </div>
                 </div> <!-- End of row -->
-
              
 
                 {{-- Edit Category Modal --}}

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Backend\GradeController;
 use App\Http\Controllers\Backend\MainCategoryController;
 use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\RoleController;
@@ -25,8 +26,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('main-category', MainCategoryController::class);
 
     Route::post('/store/permission', [PermissionController::class, 'store'])->name('permissions.store');
-
-
     Route::get('/create/permission', [PermissionController::class, 'index'])->name('permissions.index');
 
     Route::put('/permission-update/{id}', [PermissionController::class, 'update'])->name('permissions.update');
@@ -42,6 +41,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::put('user/{id}', [RegisteredUserController::class, 'update'])->name('user.update');
     Route::delete('user/{id}', [RegisteredUserController::class, 'destroy'])->name('user.destroy');
+
+    Route::resource('grades', GradeController::class);
 
 
     Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');

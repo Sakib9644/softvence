@@ -137,7 +137,7 @@
                         @can('category-create')
                         <li class="nav-item">
                             <a href="{{ route('main-category.index') }}" class="nav-link {{ Route::is('main-category.index') ? 'active' : '' }}"
-                               data-key="t-all-categories">All Categories</a>
+                               data-key="t-all-categories"> Categories</a>
                         </li>
                         @endcan
 

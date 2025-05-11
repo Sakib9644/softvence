@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\File;
 
 class MainCategoryController extends Controller
 {
@@ -55,10 +56,7 @@ class MainCategoryController extends Controller
             $category = new MainCategory();
             $category->name = $request->name;
             $category->slug =  Str::slug($category->name) . '-' . time();
-
-
             $category->image = upload_image($request, $category);
-
             $category->save();
 
             return redirect()->back()->with('success', 'Main Category created successfully.');
@@ -79,7 +77,7 @@ class MainCategoryController extends Controller
             $category = MainCategory::findOrFail($id);
             $category->name = $request->name;
 
-            $image = upload_image($request, $category);
+            $image = upload_image($request, $category,$category->image);
 
             if ($image) {
                 $category->image = $image;
@@ -98,10 +96,9 @@ class MainCategoryController extends Controller
         try {
             $category = MainCategory::findOrFail($id);
 
-            if ($category->image && Storage::disk('public')->exists($category->image)) {
-                Storage::disk('public')->delete($category->image);
+            if (!empty($category->image) && File::exists(public_path($category->image))) {
+                File::delete(public_path($category->image));
             }
-
             $category->delete();
 
             return redirect()->back()->with('success', 'Main Category deleted successfully.');
