@@ -5,7 +5,7 @@
 
         <div class="page-content">
             <div class="container-fluid">
-      
+
                 <div class="row">
                     <div class="col">
                         <div class="h-100">
@@ -21,63 +21,64 @@
                             </div>
 
                             <!-- Static Quick Links with Zoom Effect -->
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <a href="#"
-                                        class="card text-center h-100 shadow-sm text-decoration-none zoom-hover">
-                                        <div class="card-body">
-                                            <i class="ri-upload-2-line fs-2 text-primary mb-2"></i>
-                                            <h6 class="mb-0 text-dark">Product Upload</h6>
-                                        </div>
-                                    </a>
+                            @if (auth()->user()->hasRole('Super Admin'))
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <a href="#"
+                                            class="card text-center h-100 shadow-sm text-decoration-none zoom-hover">
+                                            <div class="card-body">
+                                                <i class="ri-upload-2-line fs-2 text-primary mb-2"></i>
+                                                <h6 class="mb-0 text-dark">Product Upload</h6>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <a href="#"
+                                            class="card text-center h-100 shadow-sm text-decoration-none zoom-hover">
+                                            <div class="card-body">
+                                                <i class="ri-folder-upload-line fs-2 text-primary mb-2"></i>
+                                                <h6 class="mb-0 text-dark">Category Upload</h6>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <a href="#"
+                                            class="card text-center h-100 shadow-sm text-decoration-none zoom-hover">
+                                            <div class="card-body">
+                                                <i class="ri-file-list-line fs-2 text-primary mb-2"></i>
+                                                <h6 class="mb-0 text-dark">Manage Orders</h6>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <a href="#"
+                                            class="card text-center h-100 shadow-sm text-decoration-none zoom-hover">
+                                            <div class="card-body">
+                                                <i class="ri-user-line fs-2 text-primary mb-2"></i>
+                                                <h6 class="mb-0 text-dark">Customer List</h6>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <a href="#"
+                                            class="card text-center h-100 shadow-sm text-decoration-none zoom-hover">
+                                            <div class="card-body">
+                                                <i class="ri-bar-chart-line fs-2 text-primary mb-2"></i>
+                                                <h6 class="mb-0 text-dark">Reports</h6>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <a href="#"
+                                            class="card text-center h-100 shadow-sm text-decoration-none zoom-hover">
+                                            <div class="card-body">
+                                                <i class="ri-settings-3-line fs-2 text-primary mb-2"></i>
+                                                <h6 class="mb-0 text-dark">Settings</h6>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <a href="#"
-                                        class="card text-center h-100 shadow-sm text-decoration-none zoom-hover">
-                                        <div class="card-body">
-                                            <i class="ri-folder-upload-line fs-2 text-primary mb-2"></i>
-                                            <h6 class="mb-0 text-dark">Category Upload</h6>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <a href="#"
-                                        class="card text-center h-100 shadow-sm text-decoration-none zoom-hover">
-                                        <div class="card-body">
-                                            <i class="ri-file-list-line fs-2 text-primary mb-2"></i>
-                                            <h6 class="mb-0 text-dark">Manage Orders</h6>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <a href="#"
-                                        class="card text-center h-100 shadow-sm text-decoration-none zoom-hover">
-                                        <div class="card-body">
-                                            <i class="ri-user-line fs-2 text-primary mb-2"></i>
-                                            <h6 class="mb-0 text-dark">Customer List</h6>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <a href="#"
-                                        class="card text-center h-100 shadow-sm text-decoration-none zoom-hover">
-                                        <div class="card-body">
-                                            <i class="ri-bar-chart-line fs-2 text-primary mb-2"></i>
-                                            <h6 class="mb-0 text-dark">Reports</h6>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <a href="#"
-                                        class="card text-center h-100 shadow-sm text-decoration-none zoom-hover">
-                                        <div class="card-body">
-                                            <i class="ri-settings-3-line fs-2 text-primary mb-2"></i>
-                                            <h6 class="mb-0 text-dark">Settings</h6>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\MainCategory;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 
 if (!function_exists('upload_image')) {
@@ -17,5 +19,18 @@ if (!function_exists('upload_image')) {
     
             return '/uploads/' . $folderName . '/' . $thumbnailName;
         }
+    }
+}
+if (!function_exists('slug')) {
+    function slug($name, $user) {
+        $slug = Str::slug($name);
+
+        if(MainCategory::where('slug', $slug )->exists()) {
+            $slug  = $slug = Str::slug($name) . '-' . time();
+
+
+
+        }
+        return $slug;
     }
 }

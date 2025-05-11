@@ -24,7 +24,7 @@
             {{-- Dashboard --}}
             @can('dashboard')
             <li class="nav-item">
-                <a class="nav-link menu-link" href="/dashboard">
+                <a class="nav-link menu-link" href="{{ route('dashboard') }}">
                     <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboard">Dashboard</span>
                 </a>
             </li>
@@ -124,29 +124,23 @@
             @endcanany
 
             {{-- Categories --}}
-            @canany(['main-category.index', 'main-category.create'])
+            @canany(['category-create'])
             <li class="nav-item">
                 <a class="nav-link menu-link" href="#sidebarCategory" data-bs-toggle="collapse" role="button"
                    aria-expanded="false" aria-controls="sidebarCategory">
                     <i class="ri-list-unordered"></i> <!-- Icon for category section -->
-                    <span data-key="t-category">Categories</span>
+                    <span data-key="t-category">Modules</span>
                 </a>
 
                 <div class="collapse menu-dropdown" id="sidebarCategory">
                     <ul class="nav nav-sm flex-column">
-                        @can('main-category.index')
+                        @can('category-create')
                         <li class="nav-item">
                             <a href="{{ route('main-category.index') }}" class="nav-link {{ Route::is('main-category.index') ? 'active' : '' }}"
                                data-key="t-all-categories">All Categories</a>
                         </li>
                         @endcan
 
-                        @can('main-category.create')
-                        <li class="nav-item">
-                            <a href="{{ route('main-category.create') }}" class="nav-link {{ Route::is('category.create') ? 'active' : '' }}"
-                               data-key="t-create-category">Create Category</a>
-                        </li>
-                        @endcan
                     </ul>
                 </div>
             </li>

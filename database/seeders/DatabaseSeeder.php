@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
 
             "name"=> "Admin User",
             "email"=> "admin@gmail.com",
-            "role"=> "Super Admin",
             "password"=> Hash::make("12345678"),
 
         ]);
@@ -42,6 +41,7 @@ class DatabaseSeeder extends Seeder
             'profile-settings',
             'security-settings',
             'notification-settings',
+            'category-create',
             
             // Role Permission
             'role.create',

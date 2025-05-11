@@ -6,16 +6,32 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Yajra\DataTables\Facades\DataTables;
 
 class RoleController extends Controller
 {
-    public function index()
-    {
-        $roles = Role::with('permissions')->get();
-        $permissions = Permission::all();
 
-        return view('backend.role.index', compact('roles', 'permissions'));
+public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $data = Role::with('permissions')->get();
+
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('permissions', function ($role) {
+                return $role->permissions->map(function ($permission) {
+                    return '<span class="badge bg-success me-1">' . $permission->name . '</span>';
+                })->implode(' ');
+            })
+            ->rawColumns(['permissions'])
+            ->make(true);
     }
+
+    $roles = Role::all(); // Optional: or just []
+    $permissions = Permission::all();
+    return view('backend.role.index', compact('roles', 'permissions'));
+}
+
     public function permission($id)
     {
         $roles = Role::find( $id );

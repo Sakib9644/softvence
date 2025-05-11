@@ -26,17 +26,19 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::post('/store/permission', [PermissionController::class, 'store'])->name('permissions.store');
 
-    Route::get('/create/permission', [PermissionController::class, 'create'])->name('permissions.create');
 
     Route::get('/create/permission', [PermissionController::class, 'index'])->name('permissions.index');
 
-    Route::put('/permissions/{id}', [PermissionController::class, 'update'])->name('permissions.update');
+    Route::put('/permission-update/{id}', [PermissionController::class, 'update'])->name('permissions.update');
+
+    Route::get('permissions-edit/{id}', [PermissionController::class, 'edit'])->name('permissions.edit');
 
     Route::delete('permissions/{id}', [PermissionController::class, 'destroy'])->name('permissions.destroy');
 
     Route::post('/user/store', [RegisteredUserController::class, 'admin_user'])->name('user.store');
 
     Route::get('/create/user', [RegisteredUserController::class, 'admin_create'])->name('users.create');
+    Route::get('/user/edit/{id}', [RegisteredUserController::class, 'edit'])->name('user.edit');
 
     Route::put('user/{id}', [RegisteredUserController::class, 'update'])->name('user.update');
     Route::delete('user/{id}', [RegisteredUserController::class, 'destroy'])->name('user.destroy');

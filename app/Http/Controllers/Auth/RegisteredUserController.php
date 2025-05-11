@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
+use Yajra\DataTables\Facades\DataTables;
 
 class RegisteredUserController extends Controller
 {
@@ -87,9 +88,41 @@ class RegisteredUserController extends Controller
 
     public function admin_create(Request $request)
     {
+        if ($request->ajax()) {
+    $data = User::with('roles')->select('users.*');
 
+    return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('role', function ($user) {
+            return $user->getRoleNames()->first();
+        })
+        ->addColumn('action', function ($user) {
+            // Edit Button - Link to external edit page
+            $editBtn = '<a href="' . route('user.edit', $user->id) . '" class="btn btn-sm btn-warning">Edit</a>';
+
+            // Delete Button
+            $deleteForm = '<form id="delete-form-' . $user->id . '" method="POST" action="' . route('user.destroy', $user->id) . '" style="display:inline-block;">' . 
+                          csrf_field() . method_field('DELETE') . 
+                          '</form>';
+
+            $deleteBtn = '<button onclick="confirmDelete(' . $user->id . ')" class="btn btn-sm btn-danger">Delete</button>';
+
+            return $editBtn . ' ' . $deleteForm . ' ' . $deleteBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+}
+
+
+
+        // Return the user creation form view
         return view('backend.role.user_create');
     }
+    public function edit($id) {
+        $user = User::findOrFail($id);
+        return view('backend.role.user_edit', compact('user'));
+    }
+
     public function admin_user(Request $request)
     {
         $request->validate([
